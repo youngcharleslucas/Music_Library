@@ -11,13 +11,13 @@ from rest_framework import status
 
 
 class SongList(APIView):
-
+# retrieveing object from db
     def get(self, request):
         song = Song.objects.all()
         serializer = SongSerializer(song, many=True)
         return Response(serializer.data)
 
-# 
+# Create new object on db
     def post(self, request):
         serializer = SongSerializer(data=request.data)
         if serializer.is_valid():
@@ -27,7 +27,7 @@ class SongList(APIView):
 
 class SongDetail(APIView):
    
-#  
+# Retrieves objects to be used in the following functions
     def get_object(self, pk):
         try:
             return Song.objects.get(pk=pk)
